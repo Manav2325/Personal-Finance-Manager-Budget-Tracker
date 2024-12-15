@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager - Expense Tracker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+    <header>
+        <h2>Personal Finance Manager - Expense Tracker</h2>
+    </header>
+
+    <h4>Your Balance</h4>
+    <h1 id="balance">₹{{ balance|floatformat:2 }}</h1>
+    
+    <div class="inc-exp-container">
+        <div>
+            <h4>Income</h4>
+            <p id="money-plus" class="money plus">+₹{{ income|floatformat:2 }}</p>
+        </div>
+    
+        <div>
+            <h4>Expense</h4>
+            <p id="money-minus" class="money minus">-₹{{ expense|floatformat:2 }}</p>
+        </div>
+    </div>
+    
+    <div>
+        <h3>History</h3>
+        <ul id="list" class="list">
+            {% for expense in expenses %}
+                <li>
+                   <span>{{ expense.name }}</span>
+                   <span>{{ expense.amount }}</span>
+                   <button class="edit-btn" onclick="editExpense({{ expense.id }}, '{{ expense.name }}', {{ expense.amount }})">Edit</button>
+                   <a href="{% url 'delete_expense' expense.id %}" class="delete-btn">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+
+        <h3>Add new transaction</h3>
+
+        <form id="form" method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="expense_id" id="expense_id" value="">
+            <div class="form-control">
+                <label for="text">Name</label>
+                <input type="text" name="name" id="text" placeholder="Enter name of transaction..." required>
+            </div>
+
+            <div class="form-control">
+                <label for="amount">Amount</label>
+                <input type="number" name="amount" id="amount" placeholder="Enter amount..." required>
+            </div>
+
+            <button type="submit" class="btn">Add transaction</button>
+        </form>
+    </div>
+
+    
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
