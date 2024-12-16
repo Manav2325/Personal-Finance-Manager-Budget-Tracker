@@ -8,19 +8,25 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="container">
+    <header>
+        <h1>Welcome to Personal Finance Tracker</h1>
+    </header>
+
+    <div class="container login-container">
         <h2>Login</h2>
         <form method="post" action="">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Enter username" required>
-            <input type="password" name="password" placeholder="Enter password" required>
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
         </form>
-        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+        <p class="signup-text">
+            Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>
+        </p>
     </div>
-
-
-
-    
 </body>
 </html>
