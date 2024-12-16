@@ -34,7 +34,6 @@
                 <li>
                    <span>{{ expense.name }}</span>
                    <span>{{ expense.amount }}</span>
-                   <button class="edit-btn" onclick="editExpense({{ expense.id }}, '{{ expense.name }}', {{ expense.amount }})">Edit</button>
                    <a href="{% url 'delete_expense' expense.id %}" class="delete-btn">Delete</a>
                 </li>
             {% endfor %}
@@ -45,7 +44,6 @@
 
         <form id="form" method="post" action="">
             {% csrf_token %}
-            <input type="hidden" name="expense_id" id="expense_id" value="">
             <div class="form-control">
                 <label for="text">Name</label>
                 <input type="text" name="name" id="text" placeholder="Enter name of transaction..." required>
@@ -57,10 +55,11 @@
             </div>
 
             <button type="submit" class="btn">Add transaction</button>
+            
         </form>
     </div>
 
     
-    <script src="{% static 'js/login.js' %}"></script>
+    
 </body>
 </html>
